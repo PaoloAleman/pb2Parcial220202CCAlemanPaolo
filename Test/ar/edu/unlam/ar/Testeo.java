@@ -83,7 +83,7 @@ public class Testeo {
 	public void queNoSePuedaActivarUnaAlarmaSiHayAlMenosUnSensorDesactivado() {
 		UsuarioAdmin usuario= new UsuarioAdmin(1, "Luffy");
 		UsuarioActivador usuario2= new UsuarioActivador(1, "Luffy");
-		Sensor sensor= new Sensor(1, true);
+		Sensor sensor= new Sensor(1, false);
 		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
 		try {
 			usuario.agregarUnSensorAUnaAlarma(sensor, alarma);

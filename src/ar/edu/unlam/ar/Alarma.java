@@ -25,8 +25,14 @@ public class Alarma {
 		this.sensores= new ArrayList();
 	}
 
-	public void obtenerAccionesOrdenadas() {
-	Collections.sort(acciones, new OrdenarAccionesPorId());	
+	public ArrayList<Accion> obtenerAccionesOrdenadas() {
+		for (Accion accion : acciones) {
+			if(accion.getTipo().equals(TipoDeOperacion.Configuracion)) {
+				Collections.sort(acciones, new OrdenarAccionesPorId());	
+			}
+		}
+		return acciones;
+		
 	}
 	
 	public Integer getId() {
