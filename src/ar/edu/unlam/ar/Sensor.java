@@ -9,7 +9,7 @@ public class Sensor {
 	
 	public Sensor(Integer id, Boolean estado) {
 		this.id = id;
-		this.estado = estado;
+		this.estado=estado;
 	}
 	public Integer getId() {
 		return id;

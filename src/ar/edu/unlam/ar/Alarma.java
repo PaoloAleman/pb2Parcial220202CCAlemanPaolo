@@ -8,12 +8,14 @@ public class Alarma {
 	private Integer codigoDeAct;
 	private String codigoDeConfig;
 	private String nombre;
+	private Boolean estado;
 	ArrayList<Usuario> usuariosValidos;
 	ArrayList<Accion> acciones;
 	ArrayList<Sensor> sensores;
 	
 	public Alarma(Integer id, Integer codigoDeAct, String codigoDeConfig, String nombre) {
 		super();
+		this.estado=false;
 		this.id = id;
 		this.codigoDeAct = codigoDeAct;
 		this.codigoDeConfig = codigoDeConfig;
@@ -23,9 +25,10 @@ public class Alarma {
 		this.sensores= new ArrayList();
 	}
 
-	public Alarma() {
-		
+	public void obtenerAccionesOrdenadas() {
+	Collections.sort(acciones, new OrdenarAccionesPorId());	
 	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -81,6 +84,15 @@ public class Alarma {
 	public void setSensores(ArrayList<Sensor> sensores) {
 		this.sensores = sensores;
 	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+	
 	
 	
 	

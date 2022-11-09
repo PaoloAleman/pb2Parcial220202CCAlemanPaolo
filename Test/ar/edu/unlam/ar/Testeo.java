@@ -49,7 +49,7 @@ public class Testeo {
 	@Test
 	public void queAlAgregarUnSensorDuplicadoEnUnaAlarmaSeLanceUnaExcepcion() {
 		UsuarioAdmin usuario= new UsuarioAdmin(1, "Luffy");
-		Sensor sensor= new Sensor(1, true);
+		Sensor sensor= new Sensor(1,false);
 		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
 		try {
 			usuario.agregarUnSensorAUnaAlarma(sensor, alarma);
@@ -66,7 +66,7 @@ public class Testeo {
 	@Test
 	public void queSeHayaActivadoLaAlarma() {
 		UsuarioAdmin usuario= new UsuarioAdmin(1, "Luffy");
-		Sensor sensor= new Sensor(1, true);
+		Sensor sensor= new Sensor(1, false);
 		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
 		try {
 			usuario.agregarUnSensorAUnaAlarma(sensor, alarma);
@@ -81,9 +81,38 @@ public class Testeo {
 	}
 	@Test
 	public void queNoSePuedaActivarUnaAlarmaSiHayAlMenosUnSensorDesactivado() {
-		
-		
+		UsuarioAdmin usuario= new UsuarioAdmin(1, "Luffy");
+		UsuarioActivador usuario2= new UsuarioActivador(1, "Luffy");
+		Sensor sensor= new Sensor(1, true);
+		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
+		try {
+			usuario.agregarUnSensorAUnaAlarma(sensor, alarma);
+		} catch (SensorDuplicadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		usuario.activarAlarmas(alarma,usuario2);
+		Boolean valorEsperado= true;
+		Boolean valorObtenido= alarma.getEstado();
+		assertEquals(valorEsperado, valorObtenido);
+
 	}
 	
+	@Test
+	public void activarAlarma() {
+		UsuarioActivador usuario2= new UsuarioActivador(1, "Luffy");
+		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
+		usuario2.activarAlarma(alarma, alarma.getCodigoDeAct());
+		Boolean valorEsperado= true;
+		Boolean valorObtenido= alarma.getEstado();
+		assertEquals(valorEsperado, valorObtenido);
+	}
+	
+	@Test
+	public void queParaUnaAlarmaDeterminadaSePuedaObtenerUnaColeccionOrdenadaDeAccionesDeTipoConfigOrdenadasPorIdAccion() {
+		UsuarioActivador usuario2= new UsuarioActivador(1, "Luffy");
+		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
+		
+	}
 	
 }

@@ -6,4 +6,13 @@ public class UsuarioActivador extends Usuario implements Activable {
 		super(dni, nombre);
 	}
 
+	@Override
+	public boolean activarAlarma(Alarma alarma, Integer integer) {
+		if(alarma.getCodigoDeAct().equals(integer)) {
+			alarma.setEstado(true);
+
+		}
+		return false;
+	}
+
 }
