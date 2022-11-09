@@ -23,11 +23,26 @@ public class UsuarioAdmin extends Usuario {
 		throw new CodigoIncorrectoException("El codigo es incorrecto");
 	}
 	
-	public void agregarUnSensorAUnaAlarma(Sensor sensor, Alarma alarma) {
-		
+	public boolean agregarUnSensorAUnaAlarma(Sensor sensor, Alarma alarma) throws SensorDuplicadoException {
+		if(alarma.getSensores().contains(sensor)==false) {
+			return alarma.getSensores().add(sensor);
+		}
+		throw new SensorDuplicadoException("Ese sensor ya existe");
 	}
 	
-
+	public void activarSensorDeAlarma(Alarma alarma, Sensor sensor, String codigoDeConfig) {
+		if(alarma.getSensores().contains(sensor) && alarma.getCodigoDeConfig().equals(codigoDeConfig)) {
+			sensor.setEstado(true);
+		}
+	}
+	
+	public void recorrerSensores(Alarma alarma, UsuarioActivador usuario) {
+		for (Sensor a : alarma.sensores) {
+			if(a.getEstado() || alarma.sensores.isEmpty()==false) {
+				
+			}
+		}
+	}
 	
 	
 
