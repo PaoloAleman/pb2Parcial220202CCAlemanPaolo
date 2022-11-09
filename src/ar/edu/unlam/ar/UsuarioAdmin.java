@@ -6,19 +6,25 @@ public class UsuarioAdmin extends Usuario {
 		super(dni, nombre);
 	}
 	
-	public boolean agregarAlarma(Alarma alarma, Central central) {
-		return central.alarmas.add(alarma);
+	public void agregarAlarma(Alarma alarma, Central central) {
+		central.getAlarmas().put(alarma.getId(), alarma);
 	}
 	
 	public void agregarUsuario(Usuario usuario, Central central) {
 		if(usuario instanceof UsuarioConfig || usuario instanceof UsuarioActivador ) {
-			central.usuarios.put(usuario.getDni(), usuario);
+			central.getUsuarios().put(usuario.getDni(), usuario);
 		}
 	}
 	
-	public boolean agregarUnUsuarioAUnaAlarma(Integer dniUsuario, Integer idAlarma, String codigoConfigAlarma) {
+	public boolean agregarUnUsuarioAAlarma(Usuario usuario, Alarma alarma, String codigo) throws CodigoIncorrectoException {
+		if(alarma.getCodigoDeConfig().equals(codigo)) {
+			return alarma.getUsuariosValidos().add(usuario);
+		}
+		throw new CodigoIncorrectoException("El codigo es incorrecto");
+	}
+	
+	public void agregarUnSensorAUnaAlarma(Sensor sensor, Alarma alarma) {
 		
-		return false;
 	}
 	
 

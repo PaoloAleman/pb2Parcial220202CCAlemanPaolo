@@ -9,10 +9,13 @@ public class Testeo {
 	@Test
 	public void queSePuedaRegistrarUnaAlarmaEnLaCentral() {
 		UsuarioAdmin usuario= new UsuarioAdmin(1,"Luffy");
-		Alarma alarma= new Alarma();
+		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
 		Central central= new Central();
-		assertTrue(usuario.agregarAlarma(alarma, central));
-	}
+		usuario.agregarAlarma(alarma, central);
+		Integer valorEsperado= 1;
+		Integer valorObtenido= central.getAlarmas().size();
+		assertEquals(valorEsperado, valorObtenido);
+		}
 	
 	@Test
 	public void queSePuedaAgregarUnUsuarioALaCentral() {
@@ -20,17 +23,27 @@ public class Testeo {
 		Usuario usuario2= new UsuarioConfig(2,"Luffy");
 		Central central= new Central();
 		usuario.agregarUsuario(usuario2, central);
-		Integer valorEsperado= 2;
-		Integer valorObtenido= central.usuarios.size();
+		Integer valorEsperado= 1;
+		Integer valorObtenido= central.getUsuarios().size();
 		assertEquals(valorEsperado, valorObtenido);
 	}
+
 	
 	@Test
-	public void queSePuedaAgregarUnUsuarioConfiguradorAUnaAlarma() {
+	public void queAlAgregarUnUsuarioAUnaAlarmaConCodigoDeConfiguracionInvalidoSeLanceUnaExcepcion() {
 		UsuarioAdmin usuario= new UsuarioAdmin(1, "Luffy");
 		Usuario usuario2= new UsuarioConfig(1, "Luffy");
 		Alarma alarma= new Alarma(1, 1, "A1", "Alarma");
-		usuario.agregarUnUsuarioAUnaAlarma(usuario2.getDni(),alarma.getId(),alarma.getCodigoDeConfig());
+		try {
+			usuario.agregarUnUsuarioAAlarma(usuario2, alarma, alarma.getCodigoDeConfig());
+		} catch (CodigoIncorrectoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Integer valorEsperado= 2;
+		Integer valorObtenido= alarma.usuariosValidos.size();
+		assertEquals(valorEsperado, valorObtenido);
+	
 	}
 	
 	
