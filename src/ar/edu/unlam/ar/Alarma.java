@@ -6,13 +6,13 @@ public class Alarma {
 
 	private Integer id;
 	private Integer codigoDeAct;
-	private Integer codigoDeConfig;
+	private String codigoDeConfig;
 	private String nombre;
 	ArrayList<Usuario> usuariosValidos;
 	ArrayList<Accion> acciones;
 	ArrayList<Sensor> sensores;
 	
-	public Alarma(Integer id, Integer codigoDeAct, Integer codigoDeConfig, String nombre) {
+	public Alarma(Integer id, Integer codigoDeAct, String codigoDeConfig, String nombre) {
 		super();
 		this.id = id;
 		this.codigoDeAct = codigoDeAct;
@@ -42,11 +42,11 @@ public class Alarma {
 		this.codigoDeAct = codigoDeAct;
 	}
 
-	public Integer getCodigoDeConfig() {
+	public String getCodigoDeConfig() {
 		return codigoDeConfig;
 	}
 
-	public void setCodigoDeConfig(Integer codigoDeConfig) {
+	public void setCodigoDeConfig(String codigoDeConfig) {
 		this.codigoDeConfig = codigoDeConfig;
 	}
 
